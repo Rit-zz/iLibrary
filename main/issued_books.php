@@ -89,8 +89,13 @@
                                   ";
                           $result = mysqli_query($conn, $sql);
 
-                          // echo $result;
-                          $count = mysqli_num_rows($result);
+                          if(!($result))
+                          {
+                            $count = 0;  
+                          }
+                          else
+                            $count = mysqli_num_rows($result);
+                          
                           $GLOBALS['count_of_books'] = $count;
 
                           if ($count > 0) {
