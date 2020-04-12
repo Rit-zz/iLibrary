@@ -68,7 +68,7 @@
                         <tbody>
 
                         <?php
-                          $prn_session_id = 1;
+                          $prn_session_id = 1; //Session ID is here
                           $servername = "localhost";
                           $username = "root";
                           $password = "";
@@ -130,18 +130,18 @@
                 </div>
             </div>
             <div class="col mb-2">
-                <div class="row">
+                  <div class="row">
                     <div class="col-sm-12 col-md-6" style="margin-bottom: 10px">
-                    <?php
-                      $link ="";
-                      if ($GLOBALS['count_of_books'] < 2) {
-                        $link = "index.php";
-                        $addButton = "<a href= $link>
-                        <button class='btn btn-lg btn-warning btn-block btn-outline-primary text-uppercase'>ADD MORE</button>
-                        </a>";
-                        echo $addButton;
-                      }
-                    ?>
+                      <?php
+                        $link ="";
+                        if ($GLOBALS['count_of_books'] < 2) { //Adds ADD MORE button when books<2
+                          $link = "index.php";
+                          $addButton = "<a href= $link>
+                          <button class='btn btn-lg btn-warning btn-block btn-outline-primary text-uppercase'>ADD MORE</button>
+                          </a>";
+                          echo $addButton;
+                        }
+                      ?>
                     </div>
                     <div class="col-sm-12 col-md-6 text-right">
                       <a href="confirm.php">
@@ -149,7 +149,7 @@
                         data-toggle='modal' data-target='#exampleModal'>Confirm</button>
                       </a>
                     </div>
-                </div>
+                  </div>
             </div>
         </div>
     </div>

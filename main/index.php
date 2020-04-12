@@ -92,7 +92,7 @@
             }
             // echo "Connected successfully";
 
-            $sql = "select * from book_type";
+            $sql = "select * from book_type limit 10";
 
             $result = mysqli_query($conn, $sql);
 
