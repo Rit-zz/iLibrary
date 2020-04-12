@@ -108,6 +108,8 @@ div.ex1 {
           // $count = mysqli_num_rows($result);
 
           $link_path = "http://localhost/ilibrary/main/images/books/";
+          $link_map_path = "http://localhost/ilibrary/main/images/maps/map";
+          $ext = ".png";
           $card_string = "<div class='col-lg-6 col-md-6'>
             
               <img class='card-img-top' src='". $link_path . $row["cover_image"] . " ' > 
@@ -126,7 +128,21 @@ div.ex1 {
                 </a>    
                 
             </div>
-          </div>";
+          </div>
+          
+          <div class='col-lg-6 col-md-6'>
+          <h3>Location:</h3>
+        <div class='ex1'>
+
+
+            <img width='720' height='640' src='". $link_map_path . $row["location"] . $ext . "' />
+            <!-- <canvas id='canvas' width='720' height='640'></canvas> -->
+
+        </div>
+      </div>  
+    </div> 
+          
+          ";
 
           echo $card_string;
         ?>
@@ -139,13 +155,7 @@ div.ex1 {
           
 
 
-          <div class="col-lg-6 col-md-6">
-              <h3>Location:</h3>
-            <div class="ex1">
-                <canvas id="canvas" width="720" height="640"></canvas>
-            </div>
-          </div>  
-        </div>   
+  
 
        
         
