@@ -180,7 +180,7 @@ div.ex1 {
         ctx.fillRect(74, 259, 128, 25);
         ctx.stroke();
       };
-      img.src = 'map1.png';
+      img.src = 'map.png';
     }
 </script>
 </body>
