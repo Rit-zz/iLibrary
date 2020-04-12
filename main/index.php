@@ -49,7 +49,7 @@
             <a class="nav-link" href="#">About</a>
           </li> -->
           <li class="nav-item">
-            <a class="nav-link" href="change_password.html">Change Password</a>
+          <a class="nav-link" href="issued_books.php">Issued Books</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="cart.php">Cart</a>

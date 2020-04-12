@@ -63,7 +63,7 @@ div.ex1 {
             <a class="nav-link" href="#">About</a>
           </li> -->
           <li class="nav-item">
-            <a class="nav-link" href="change_password.html">Change Password</a>
+          <a class="nav-link" href="issued_books.php">Issued Books</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="cart.php">Cart</a>
@@ -118,9 +118,9 @@ div.ex1 {
                 <div class='text-uppercase'><span style='font-size: 20px; font-weight: bold; color: #000000'>Authors:</span>". $row["author"] . "</div>
                 <br>
                 <button type='button' class='btn btn-primary' style='margin-bottom: 5px;
-                 margin-left: 5px; float: left;'>Available:". $row["quantity"] ."</button>
+                 margin-left: 5px; float: left;'>Available: ". $row["quantity"] ."</button>
 
-                <a href='add_to_cart.php?book_type_id=" . $row["book_type_id"] ."'>
+                <a href='add_to_cart.php?book_type_id=" . $row["book_type_id"] ."' onclick='alert_box()'>
                 <button type='button' class='btn btn-success' style='margin-bottom: 5px; margin-left: 5px; 
                 float: right;'>Add to cart</button>
                 </a>    
@@ -130,6 +130,12 @@ div.ex1 {
 
           echo $card_string;
         ?>
+
+        <script>
+            function alert_box() {
+              return window.alert("Book added to cart");
+            }
+        </script>
           
 
 

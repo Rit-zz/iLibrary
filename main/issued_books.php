@@ -16,14 +16,15 @@
         }
     </style>
 
-    <title>Your Cart</title>
+    <title>Issued Books</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="index.php">iLibrary</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" 
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -37,7 +38,7 @@
             <a class="nav-link" href="#">About</a>
           </li> -->
           <li class="nav-item">
-          <a class="nav-link" href="issued_books.php">Issued Books</a>
+            <a class="nav-link" href="issued_books.php">Issued Books</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="cart.php">Cart</a>
@@ -49,7 +50,7 @@
 
     <div class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Your Cart</h1>
+            <h1 class="jumbotron-heading">Issued Books</h1>
         </div>
     </div>
 
@@ -61,7 +62,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Book</th>
-                                <th scope="col">Availability</th>
+                                <th scope="col">Date of issue</th>
                                 <th> </th>
                             </tr>
                         </thead>
@@ -78,17 +79,14 @@
                             die("Connection failed: " . $conn->connect_error);
                           }
                                                   
-                          $sql = "select title, quantity, book_id
-                                  from users, books, book_type 
-                                  where prn=$prn_session_id 
-                                  and books.book_id = users.b_fk_1
-                                  and books.book_type_fk = book_type.book_type_id
-                                  union
-                                  select title, quantity, book_id 
-                                  from users, books, book_type 
-                                  where prn=$prn_session_id 
-                                  and books.book_id = users.b_fk_2
-                                  and books.book_type_fk = book_type.book_type_id ";
+                          $sql = "select title, book_id, date_of_issue, history_id 
+                                    from users, books, book_type, user_history 
+                                    where prn=$prn_session_id
+                                    and books.book_type_fk = book_type.book_type_id 
+                                    and is_returned = 0 
+                                    and prn_fk = $prn_session_id
+                                    and book_id_fk = books.book_id
+                                  ";
                           $result = mysqli_query($conn, $sql);
 
                           // echo $result;
@@ -100,11 +98,12 @@
                               $row_string = 
                               "<tr>
                                 <td>". $row["title"] ."</td>
-                                <td>". $row["quantity"] ."</td>
+                                <td>". $row["date_of_issue"] ."</td>
                                 <td class='text-right'>
-                                <a href='remove.php?book_id=". $row["book_id"] ."'>  
-                                <button type='button' class='btn btn-danger'>
-                                  Remove
+                                <a href='return.php?history_id=". $row["history_id"] ."' 
+                                onclick='return confirm_box()'>  
+                                <button  type='button' class='btn btn-danger'>
+                                  Return
                                 </button> </a>
 
                                 </td>
@@ -114,11 +113,16 @@
 
                             }
                           } else {
-                              echo "0 results";
+                              echo "0 books issued";
                           }
                           
                         ?>
-
+                        
+                        <script>
+                            function confirm_box() {
+                                return confirm("Sure?");
+                            }
+                        </script>
                             <!-- <tr>
                                 <td>Data Structures made easy</td>
                                 <td>200</td>
@@ -133,33 +137,27 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-6" style="margin-bottom: 10px">
                     <?php
-                      $link ="";
-                      if ($GLOBALS['count_of_books'] < 2) {
-                        $link = "index.php";
-                        $addButton = "<a href= $link>
-                        <button class='btn btn-lg btn-warning btn-block btn-outline-primary text-uppercase'>ADD MORE</button>
-                        </a>";
-                        echo $addButton;
-                      }
-                    ?>
+                    //   $link ="";
+                    //   if ($GLOBALS['count_of_books'] < 2) {
+                    //     $link = "index.php";
+                    //     $addButton = "<a href= $link>
+                    //     <button class='btn btn-lg btn-warning btn-block btn-outline-primary text-uppercase'>ADD MORE</button>
+                    //     </a>";
+                    //     echo $addButton;
+                    //   }
+                    ?> 
                     </div>
-                    <div class="col-sm-12 col-md-6 text-right">
-
-                      <a href="confirm.php" onclick='return confirm_box()'>
+                    <!-- <div class="col-sm-12 col-md-6 text-right">
+                      <a href="confirm.php">
                         <button type='button' class='btn btn-lg btn-block btn-success text-uppercase' 
                         data-toggle='modal' data-target='#exampleModal'>Confirm</button>
                       </a>
-                      
-                      <script>
-                            function confirm_box() {
-                                return confirm("Sure?");
-                            }
-                      </script>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
