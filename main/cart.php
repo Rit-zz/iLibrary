@@ -158,7 +158,7 @@
                       <a href="confirm.php" onclick='return confirm_box()'>
                         <button type='button' class='btn btn-lg btn-block btn-success text-uppercase' 
                         data-toggle='modal' data-target='#exampleModal' 
-                        <?php if ($GLOBALS['total_books'] > 2){ ?> disabled <?php   } ?>
+                        <?php if ($GLOBALS['total_books'] > 2 || $GLOBALS['count_of_books']==0){ ?> disabled <?php   } ?>
                         >Confirm</button>
                       </a>
 
@@ -172,9 +172,36 @@
                     </div>
                   </div>
                   <?php
-                      if ($GLOBALS['total_books'] > 2)
-                        echo "You have already issued " . $GLOBALS['count_issued'] . " books";
-                      ?>
+                      // if ($GLOBALS['total_books'] > 2)
+                      //   echo "You have already issued " . $GLOBALS['count_issued'] . " books";
+                  ?>
+
+                  <br/>
+                  <?php
+                  
+                         
+                          if ($GLOBALS['total_books'] > 2 && $GLOBALS['count_issued'] == 1)
+                          echo "<div class='alert alert-warning alert-dismissible fade show' role='alert' > <h5>" . 
+                          "You have already issued " . $GLOBALS['count_issued'] . " book" .
+
+                          "<button type='button' class='close' data-dismiss='alert' aria-label='Close'> 
+                          <span aria-hidden='true'>&times;</span> </button>" .
+
+                          "</h5> </div>";
+
+                          if ($GLOBALS['total_books'] > 2 && $GLOBALS['count_issued'] == 2)
+                          echo "<div class='alert alert-warning' role='alert'> <h5>" . 
+                          "You have already issued " . $GLOBALS['count_issued'] . " books" .
+                          "<button type='button' class='close' data-dismiss='alert' aria-label='Close'> 
+                          <span aria-hidden='true'>&times;</span> </button>" .
+                          "</h5> </div>";
+                        
+                        
+                  ?>
+
+
+
+
             </div>
         </div>
     </div>
