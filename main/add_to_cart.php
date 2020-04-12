@@ -1,6 +1,6 @@
 <?php
 
-$prn_session_id = 1;
+$prn_session_id = 1;  //Session ID is here
 $servername = "localhost";
 $username = "root";
 $password = "";
