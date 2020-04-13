@@ -65,7 +65,7 @@
     <!-- <div class="row"> -->
       <!-- <div class="col-lg-12"> -->
           <br>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-lg-3 col-md-0"></div>
             <div class="col-lg-6 col-md-12">
               <form action="search.php" method="get">
@@ -79,10 +79,7 @@
             </div>
             <div class="col-lg-3 col-md-0"></div>
           </div>
-        <div class="row">
-
-
-
+        <div class="row"> -->
           <?php
             $servername = "localhost";
             $username = "root";
@@ -96,16 +93,26 @@
                 die("Connection failed: " . $conn->connect_error);
             }
             // echo "Connected successfully";
-
-            $sql = "select * from book_type limit 10";
+            $search = $_GET["search"];
+            if ($search == "")
+            {
+                header("location: index.php");
+            }
+            
+            $sql = "select * from book_type where title like '%$search%' or author like '%$search%'";
 
             $result = mysqli_query($conn, $sql);
-
             $count = mysqli_num_rows($result);
-
-            if ($count > 0) {
+            $status = "";
+            // if ($count == 0)
+            // {
+            //     header("locaton: index.php");
+            // }
+            if ($count > 0) 
+            {
               // output data of each row
-              while($row = $result->fetch_assoc()) {
+              while($row = $result->fetch_assoc()) 
+              {
                   // echo "id: " . $row["bt_id"]. " - Name: " . $row["title"]. " " . $row["cover_image"]. "<br>";
                   $link_path = "http://localhost/ilibrary/main/images/books/";
                   $card_string = "<div class='col-lg-4 col-md-6 mb-4'>".
@@ -126,16 +133,12 @@
                   " </div>".
                   "</div>";
                   echo $card_string;
-              }
-          } else {
-              echo "0 results";
-          }
-
-
-
+                }
+            }            
+            
           ?>
 
-
+          <!-- <div align="center"><h3><php? echo $status ?><h3></div> -->
 
 
           <!-- <div class="col-lg-4 col-md-6 mb-4">
