@@ -19,6 +19,8 @@
     $book1 = $row["b_fk_1"];
     $book2 = $row["b_fk_2"];
 
+    
+
     if ($book1 != NULL) {
         $sql = "insert into user_history (prn_fk, book_id_fk) values ($prn_session_id, $book1)";
         mysqli_query($conn, $sql);

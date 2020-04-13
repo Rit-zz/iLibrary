@@ -93,6 +93,20 @@
 
                           // echo $result;
                           $count = mysqli_num_rows($result);
+
+                          $sql_count_of_issued_books = "select history_id as count_issued 
+                                                        from users, books, book_type, user_history 
+                                                        where prn= $prn_session_id
+                                                        and books.book_type_fk = book_type.book_type_id 
+                                                        and is_returned = 0 
+                                                        and prn_fk = $prn_session_id
+                                                        and book_id_fk = books.book_id";
+                          
+                          $result_count_issued = mysqli_query($conn, $sql_count_of_issued_books);
+                          $count_issued = mysqli_num_rows($result_count_issued);
+
+                          $GLOBALS['total_books'] = $count + $count_issued;
+                          $GLOBALS['count_issued'] = $count_issued;
                           $GLOBALS['count_of_books'] = $count;
 
                           if ($count > 0) {
@@ -119,11 +133,7 @@
                           
                         ?>
 
-                            <!-- <tr>
-                                <td>Data Structures made easy</td>
-                                <td>200</td>
-                                <td class="text-right"><button type="button" class="btn btn-danger">Remove</button> </td>
-                            </tr> -->
+                  
                           
                         </tbody>
                     </table>
@@ -147,8 +157,12 @@
 
                       <a href="confirm.php" onclick='return confirm_box()'>
                         <button type='button' class='btn btn-lg btn-block btn-success text-uppercase' 
-                        data-toggle='modal' data-target='#exampleModal'>Confirm</button>
+                        data-toggle='modal' data-target='#exampleModal' 
+                        <?php if ($GLOBALS['total_books'] > 2 || $GLOBALS['count_of_books']==0){ ?> disabled <?php   } ?>
+                        >Confirm</button>
                       </a>
+
+                      
                       
                       <script>
                             function confirm_box() {
@@ -157,6 +171,37 @@
                       </script>
                     </div>
                   </div>
+                  <?php
+                      // if ($GLOBALS['total_books'] > 2)
+                      //   echo "You have already issued " . $GLOBALS['count_issued'] . " books";
+                  ?>
+
+                  <br/>
+                  <?php
+                  
+                         
+                          if ($GLOBALS['total_books'] > 2 && $GLOBALS['count_issued'] == 1)
+                          echo "<div class='alert alert-warning alert-dismissible fade show' role='alert' > <h5>" . 
+                          "You have already issued " . $GLOBALS['count_issued'] . " book" .
+
+                          "<button type='button' class='close' data-dismiss='alert' aria-label='Close'> 
+                          <span aria-hidden='true'>&times;</span> </button>" .
+
+                          "</h5> </div>";
+
+                          if ($GLOBALS['total_books'] > 2 && $GLOBALS['count_issued'] == 2)
+                          echo "<div class='alert alert-warning' role='alert'> <h5>" . 
+                          "You have already issued " . $GLOBALS['count_issued'] . " books" .
+                          "<button type='button' class='close' data-dismiss='alert' aria-label='Close'> 
+                          <span aria-hidden='true'>&times;</span> </button>" .
+                          "</h5> </div>";
+                        
+                        
+                  ?>
+
+
+
+
             </div>
         </div>
     </div>
