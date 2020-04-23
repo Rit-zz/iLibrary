@@ -117,7 +117,7 @@ div.ex1 {
                 <h4 class='card-title text-uppercase'>" . 
                   $row["title"] . 
                 "</h4>
-                <div class='text-uppercase'><span style='font-size: 20px; font-weight: bold; color: #000000'>Authors:</span>". $row["author"] . "</div>
+                <div class='text-uppercase'><span style='font-size: 20px; font-weight: bold; color: #000000'>Authors: </span>". $row["author"] . "</div>
                 <br>
                 <button type='button' class='btn btn-primary' style='margin-bottom: 5px;
                  margin-left: 5px; float: left;'>Available: ". $row["quantity"] ."</button>

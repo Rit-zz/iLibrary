@@ -124,7 +124,7 @@
                         "</h4>".
                         "<div class='text-uppercase'>".
                         "<span style='font-size: 20px; font-weight: bold; color: #000000'>
-                        Authors:</span>". $row["author"] . "</div>".
+                        Authors: </span>". $row["author"] . "</div>".
                         "</div>".
                         "<div class='row'>".
                           "<div class='col-md-6'><a href='know.php?book_type_id=" . $row["book_type_id"] . 
