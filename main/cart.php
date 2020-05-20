@@ -56,6 +56,9 @@ $GLOBALS['username_gb'] = $_SESSION['username'];
           <li class="nav-item">
             <a class="nav-link" href="cart.php">Cart</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./../auth/logout.php">Logout</a>
+          </li>
         </ul>
       </div>
     </div>
