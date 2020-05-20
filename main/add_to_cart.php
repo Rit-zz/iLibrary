@@ -1,6 +1,14 @@
 <?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: ./../auth/login.php");
+    exit;
+}
 
-$prn_session_id = 1;  //Session ID is here
+$prn_session_id = $_SESSION['username'];  //Session ID is here
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -36,7 +44,7 @@ if ($count > 0) {
 }
 
 
-$sql = "select * from users where prn=$prn_session_id";
+$sql = "select * from users where username='$prn_session_id'";
 
 $result = mysqli_query($conn, $sql);
 $row = $result->fetch_assoc();
@@ -50,7 +58,7 @@ else if($row["b_fk_2"] == NULL)
 else echo "Already 2 books in cart";
 
 if($row["b_fk_1"] != $book_id && $row["b_fk_2"] != $book_id) {
-    $sql = "update users set $query_parameter = $book_id where prn=$prn_session_id";
+    $sql = "update users set $query_parameter = $book_id where username='$prn_session_id'";
     $result = mysqli_query($conn, $sql);
 } else {
     echo "Book already in cart";

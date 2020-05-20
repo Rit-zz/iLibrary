@@ -1,3 +1,14 @@
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: ./../auth/login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,6 +64,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="cart.php">Cart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./../auth/logout.php">Logout</a>
           </li>
         </ul>
       </div>
