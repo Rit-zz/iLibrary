@@ -91,7 +91,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <!-- <meta charset="UTF-8"> -->
     <!-- <title>Login</title> -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> -->
     <!-- Required meta tags -->
@@ -125,12 +125,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                     <!-- <label>Username</label> -->
-                    <input type="text" name="username" placeholder="USERNAME" class="form-control fadeIn first" value="<?php echo $username; ?>">
+                    <input type="text" name="username" placeholder="Username" class="form-control fadeIn first" value="<?php echo $username; ?>">
                     <span class="help-block"><?php echo $username_err; ?></span>
                 </div>    
                 <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                     <!-- <label>Password</label> -->
-                    <input type="password" placeholder="PASSWORD" name="password" class="form-control fadeIn second">
+                    <input type="password" placeholder="Password" name="password" class="form-control fadeIn second">
                     <span class="help-block"><?php echo $password_err; ?></span>
                 </div>
                 <div class="form-group">
