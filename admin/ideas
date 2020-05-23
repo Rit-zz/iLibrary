@@ -1,0 +1,14 @@
+5) List Issued books option
+6) [Option] Edit books option 
+
+** navbar not working properly in mobile screen mode
+* not able to do alerts in add, remove
+* footer not spanning entire page
+* add.php - Better implementation for image - currenlty using image name - shoulf be upload image from system, name gets stored in db
+* Search - when searching for book not in db - result empty set problem 
+* fix search results from bootstrap grid system
+
+
+SELECT title, prn_fk, book_id_fk 
+FROM user_history, books, book_type 
+WHERE user_history.is_returned=0 AND user_history.book_id_fk = books.book_id AND books.book_type_fk = book_type.book_type_id

@@ -1,5 +1,14 @@
 <?php
-    $prn_session_id = 1;
+    // Initialize the session
+    session_start();
+    
+    // Check if the user is logged in, if not then redirect him to login page
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+        header("location: ./../auth/login.php");
+        exit;
+    }
+
+    // $prn_session_id = $_SESSION['username'];
     $servername = "localhost";
     $username = "root";
     $password = "";

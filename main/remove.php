@@ -1,5 +1,14 @@
 <?php
-    $prn_session_id = 1;
+    // Initialize the session
+    session_start();
+    
+    // Check if the user is logged in, if not then redirect him to login page
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+        header("location: ./../auth/login.php");
+        exit;
+    }
+
+    $prn_session_id = $_SESSION['username'];
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -11,7 +20,7 @@
     }
     // echo "Connected successfully";
     
-    $sql = "select * from users where prn=$prn_session_id";
+    $sql = "select * from users where username='$prn_session_id'";
  
     $result = mysqli_query($conn, $sql);
 
@@ -19,12 +28,12 @@
     $book_id = $_GET["book_id"];
  
     if ($row["b_fk_1"] == $book_id) {
-        $sql = "update users set b_fk_1 = NULL where prn = $prn_session_id";
+        $sql = "update users set b_fk_1 = NULL where username = '$prn_session_id'";
         mysqli_query($conn, $sql);
         echo "1";
     }
     if ($row["b_fk_2"] == $book_id) {
-        $sql = "update users set b_fk_2 = NULL where prn = $prn_session_id";
+        $sql = "update users set b_fk_2 = NULL where username = '$prn_session_id'";
         mysqli_query($conn, $sql);
         echo "2";
     }

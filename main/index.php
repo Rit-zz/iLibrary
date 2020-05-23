@@ -1,3 +1,14 @@
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: ./../auth/login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,11 +28,16 @@
   <link href="css/shop-homepage.css" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <style type="text/css">body {
+  
+  <style type="text/css">
+  
+  body {
   /*font-family: 'Roboto Slab', serif;*/
+  padding-top: 56px;
   background-color: #56baed;
   height: 100vh;
-	}</style>
+  }
+  </style>
   <!-- <style type="text/css">.responsive { -->
   <!-- width: 100%; -->
   <!-- height: 100%; -->
@@ -35,7 +51,8 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="index.php">iLibrary</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" 
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -53,6 +70,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="cart.php">Cart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./../auth/logout.php">Logout</a>
           </li>
         </ul>
       </div>
@@ -73,7 +93,7 @@
                   <div class="form-group">    
                     <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search">
                   </div>
-                  <button type="submit" class="btn btn-primary">Search</button>
+                  <button type="submit" class="btn btn-primary">Search - Author/Title/Category</button>
                 </div>
               </form>                
             </div>
@@ -174,6 +194,8 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
 </body>
 

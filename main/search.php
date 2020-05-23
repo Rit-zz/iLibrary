@@ -1,3 +1,14 @@
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: ./../auth/login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,17 +22,21 @@
   <title>iLibrary</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <!-- Custom styles for this template -->
-  <link href="css/shop-homepage.css" rel="stylesheet">
+  <!-- <link href="css/shop-homepage.css" rel="stylesheet"> -->
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <style type="text/css">body {
+  <style type="text/css">
+  
+  body {
   /*font-family: 'Roboto Slab', serif;*/
+  padding-top: 56px;
   background-color: #56baed;
   height: 100vh;
-	}</style>
+  }
+  </style>
   <!-- <style type="text/css">.responsive { -->
   <!-- width: 100%; -->
   <!-- height: 100%; -->
@@ -54,6 +69,9 @@
           <li class="nav-item">
             <a class="nav-link" href="cart.php">Cart</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./../auth/logout.php">Logout</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -65,21 +83,21 @@
     <!-- <div class="row"> -->
       <!-- <div class="col-lg-12"> -->
           <br>
-          <!-- <div class="row">
+          <div class="row">
             <div class="col-lg-3 col-md-0"></div>
             <div class="col-lg-6 col-md-12">
               <form action="search.php" method="get">
                 <div class="active-cyan-4 mb-4">
                   <div class="form-group">    
-                    <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search" required="required">
                   </div>
-                  <button type="submit" class="btn btn-primary">Search</button>
+                  <button type="submit" class="btn btn-primary">Search - Author/Title/Category</button>
                 </div>
               </form>                
             </div>
             <div class="col-lg-3 col-md-0"></div>
           </div>
-        <div class="row"> -->
+        <div class="row">
           <?php
             $servername = "localhost";
             $username = "root";
@@ -99,7 +117,7 @@
                 header("location: index.php");
             }
             
-            $sql = "select * from book_type where title like '%$search%' or author like '%$search%'";
+            $sql = "select * from book_type where title like '%$search%' or author like '%$search%' or category like '%$search%'";
 
             $result = mysqli_query($conn, $sql);
             $count = mysqli_num_rows($result);

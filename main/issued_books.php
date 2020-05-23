@@ -1,3 +1,17 @@
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: ./../auth/login.php");
+    exit;
+}
+
+$GLOBALS['username_gb'] = $_SESSION['username'];
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,6 +57,9 @@
           <li class="nav-item">
             <a class="nav-link" href="cart.php">Cart</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./../auth/logout.php">Logout</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -69,7 +86,7 @@
                         <tbody>
 
                         <?php
-                          $prn_session_id = 1;
+                          $prn_session_id = $GLOBALS['username_gb'];
                           $servername = "localhost";
                           $username = "root";
                           $password = "";
@@ -81,10 +98,10 @@
                                                   
                           $sql = "select title, book_id, date_of_issue, history_id 
                                     from users, books, book_type, user_history 
-                                    where prn=$prn_session_id
+                                    where username='$prn_session_id'
                                     and books.book_type_fk = book_type.book_type_id 
                                     and is_returned = 0 
-                                    and prn_fk = $prn_session_id
+                                    and username_fk = '$prn_session_id'
                                     and book_id_fk = books.book_id
                                   ";
                           $result = mysqli_query($conn, $sql);
