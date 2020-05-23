@@ -61,7 +61,7 @@ $servername = "localhost";
 
                         <div class="form-group">
                             <label> Author<span style="color:red;">*</span></label>
-                            <input class="form-control" type="text" name="author" autocomplete="off" required="required" />
+                            <input class="form-control" type="text" name="author" autocomplete="on" required="required" />
                         </div>
 
                         <div class="form-group">
@@ -102,7 +102,7 @@ $servername = "localhost";
 
                         <div class="form-group">
                             <label>Image Name (compete name with extension)<span style="color:red;">*</span></label>
-                            <input class="form-control" type="text" name="image" value="img.png" autocomplete="off" required="required"/>
+                            <input class="form-control" type="text" name="image" value="book.png" autocomplete="off" required="required"/>
                             <p class="help-block">Please leave the default value if you don't have an image</p>        
                         </div>
 

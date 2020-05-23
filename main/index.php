@@ -93,7 +93,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                   <div class="form-group">    
                     <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search">
                   </div>
-                  <button type="submit" class="btn btn-primary">Search</button>
+                  <button type="submit" class="btn btn-primary">Search - Author/Title/Category</button>
                 </div>
               </form>                
             </div>

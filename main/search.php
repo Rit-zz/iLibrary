@@ -83,21 +83,21 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <!-- <div class="row"> -->
       <!-- <div class="col-lg-12"> -->
           <br>
-          <!-- <div class="row">
+          <div class="row">
             <div class="col-lg-3 col-md-0"></div>
             <div class="col-lg-6 col-md-12">
               <form action="search.php" method="get">
                 <div class="active-cyan-4 mb-4">
                   <div class="form-group">    
-                    <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search" required="required">
                   </div>
-                  <button type="submit" class="btn btn-primary">Search</button>
+                  <button type="submit" class="btn btn-primary">Search - Author/Title/Category</button>
                 </div>
               </form>                
             </div>
             <div class="col-lg-3 col-md-0"></div>
           </div>
-        <div class="row"> -->
+        <div class="row">
           <?php
             $servername = "localhost";
             $username = "root";
@@ -117,7 +117,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                 header("location: index.php");
             }
             
-            $sql = "select * from book_type where title like '%$search%' or author like '%$search%'";
+            $sql = "select * from book_type where title like '%$search%' or author like '%$search%' or category like '%$search%'";
 
             $result = mysqli_query($conn, $sql);
             $count = mysqli_num_rows($result);
