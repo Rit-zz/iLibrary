@@ -23,11 +23,18 @@
           <li class="nav-item">
           <a class="nav-link" href="add_category.php">Add Category</a>
           </li>
+
           <!-- <li class="nav-item">
           <a class="nav-link" href="add_author.php">Add Author</a>
           </li> -->
           <li class="nav-item">
           <a class="nav-link" href="list_issued.php">List All Issued Books</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="reset-password.php">Reset Password</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="logout.php">Logout</a>
           </li>
         </ul>
       </div>
