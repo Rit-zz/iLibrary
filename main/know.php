@@ -81,6 +81,9 @@ div.ex1 {
             <a class="nav-link" href="cart.php">Cart</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="./../auth/reset-password.php">Reset Password</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="./../auth/logout.php">Logout</a>
           </li>
         </ul>

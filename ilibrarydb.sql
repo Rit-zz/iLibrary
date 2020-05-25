@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2020 at 11:11 AM
+-- Generation Time: May 25, 2020 at 07:15 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `ilibrarydb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ausers`
+--
+
+CREATE TABLE `ausers` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ausers`
+--
+
+INSERT INTO `ausers` (`id`, `username`, `password`, `created_at`) VALUES
+(1, 'admin', '$2y$10$CDs3tKwzUdnopjIMeN9aje9kqkXXDVrU2nEkxRs4K8Lp4k/C5SN0S', '2020-05-20 15:21:30');
 
 -- --------------------------------------------------------
 
@@ -156,6 +176,13 @@ INSERT INTO `user_history` (`history_id`, `username_fk`, `book_id_fk`, `date_of_
 --
 
 --
+-- Indexes for table `ausers`
+--
+ALTER TABLE `ausers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
 -- Indexes for table `books`
 --
 ALTER TABLE `books`
@@ -196,6 +223,12 @@ ALTER TABLE `user_history`
 --
 
 --
+-- AUTO_INCREMENT for table `ausers`
+--
+ALTER TABLE `ausers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
@@ -217,7 +250,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_history`
