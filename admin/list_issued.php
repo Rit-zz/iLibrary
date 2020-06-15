@@ -69,15 +69,15 @@ $servername = "localhost";
                                 <tr>
                                     <th scope="col">Book</th>
                                     <th scope="col">Issuer Username</th>
-                                    <th scpo="col">Issuing Date</th>
+                                    <th scope="col">Issuing Date</th>
+                                    <th scope="col">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                             <?php                       
-                            $sql = " SELECT username_fk, date_of_issue, title  FROM user_history, books, book_type 
-                                    WHERE user_history.is_returned=0 
-                                    AND user_history.book_id_fk = books.book_id 
+                            $sql = " SELECT username_fk, date_of_issue, is_returned, title  FROM user_history, books, book_type 
+                                    WHERE user_history.book_id_fk = books.book_id 
                                     AND books.book_type_fk = book_type.book_type_id ";
                             
                             $result = mysqli_query($conn, $sql);
@@ -87,11 +87,16 @@ $servername = "localhost";
 
                             if ($count > 0) {
                                 while($row = $result->fetch_assoc()) {
+                                if($row["is_returned"]==0)
+                                    $status = "Not Returned";
+                                else
+                                    $status = "Returned";
                                 $row_string = 
                                 "<tr>
                                     <td><strong>". $row["title"] ."</strong></td>
                                     <td><strong>". $row["username_fk"] ."</strong></td>
-                                    <td><strong>". $row["date_of_issue"] ."</strong></td> 
+                                    <td><strong>". $row["date_of_issue"] ."</strong></td>
+                                    <td><strong>". $status ."</strong></td> 
                                 </tr>";
 
                                 echo $row_string;
